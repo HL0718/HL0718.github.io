@@ -347,6 +347,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -365,30 +396,18 @@
       
         
           
-            <p>剑指offer系列（一）：字符串的替换<br>一、前言<br>本系列文章为《剑指Offer》刷题笔记。</p>
-<p>刷题平台：牛客网</p>
-<p>书籍下载：共享资源</p>
-<p>二、题目<br>请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。<br>1、思路<br>最简单的方法就是从头到尾遍历，但是时间复杂度为O(n^2)。<br>代码实现：本系列文章主要是用python来实现</p>
-<p>#!/usr/bin/env python</p>
-<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><h1 id="Time-2019-4-10-14-40"><a href="#Time-2019-4-10-14-40" class="headerlink" title="@Time    : 2019/4/10 14:40"></a>@Time    : 2019/4/10 14:40</h1><h1 id="Author-Zang-ao"><a href="#Author-Zang-ao" class="headerlink" title="@Author  : Zang ao"></a>@Author  : Zang ao</h1><h1 id="Site"><a href="#Site" class="headerlink" title="@Site    :"></a>@Site    :</h1><h1 id="File-替换空格-py"><a href="#File-替换空格-py" class="headerlink" title="@File    : 替换空格.py"></a>@File    : 替换空格.py</h1><h1 id="Software-PyCharm"><a href="#Software-PyCharm" class="headerlink" title="@Software: PyCharm"></a>@Software: PyCharm</h1><p>class Solution:</p>
-<pre><code># s 源字符串
-def replaceSpace(self, s):
-    n=len(s)
-    # 建立新的列表来储存替代的字符串
-    stringreplace=[]
-    # 循环遍历源字符串
-    for item in range(n):
-        # 判断当前字符是否为空
-        if s[item]==&apos; &apos;:
-            stringreplace.append(&apos;%20&apos;)
-        else:
-            stringreplace.append(s[item])
-    #         将列表转换成字符串
-    stringreplace=&apos;&apos;.join(stringreplace)
-    return stringreplace
-</code></pre><p>str=’we are happy’<br>Solution1=Solution()<br>print(Solution1.replaceSpace(str))</p>
-
-          
+          剑指offer系列（一）：字符串的替换一、前言本系列文章为《剑指Offer》刷题笔记。
+刷题平台：牛客网
+书籍下载：共享资源
+二、题目请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。1、思路最简
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/12/替换空格/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -488,6 +507,37 @@ def replaceSpace(self, s):
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -506,17 +556,15 @@ def replaceSpace(self, s):
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/12/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

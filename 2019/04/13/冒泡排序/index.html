@@ -104,12 +104,17 @@
 <meta property="og:site_name" content="Dream Come True">
 <meta property="og:description" content="一、前言冒泡排序是一种交换排序。 什么是交换排序呢？将列表的所有元素两两进行比较，如果存在不符合要求的排序就进行交换位置，直到整个列表都满足要求为止 二、算法思想它重复地走访要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。 这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端，故名冒泡排序。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190413004455684.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-04-13T05:45:15.711Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/timg.gif">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/代码1.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/运行结果.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/代码2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/最后结果.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/分析.jpg">
+<meta property="og:updated_time" content="2019-04-13T08:27:27.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序算法（一）：冒泡排序">
 <meta name="twitter:description" content="一、前言冒泡排序是一种交换排序。 什么是交换排序呢？将列表的所有元素两两进行比较，如果存在不符合要求的排序就进行交换位置，直到整个列表都满足要求为止 二、算法思想它重复地走访要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。 这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端，故名冒泡排序。">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190413004455684.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="http://yoursite.com/2019/04/13/冒泡排序/timg.gif">
 
 
 
@@ -407,7 +412,7 @@
                 
               
 
-              <time title="创建时间：2019-04-13 00:46:56" itemprop="dateCreated datePublished" datetime="2019-04-13T00:46:56+08:00">2019-04-13</time>
+              <time title="创建时间：2019-04-13 16:26:55" itemprop="dateCreated datePublished" datetime="2019-04-13T16:26:55+08:00">2019-04-13</time>
             
 
             
@@ -464,7 +469,7 @@
                 <span class="leancloud-visitors-count"></span>
             </span>
             <span class="post-meta-divider">|</span>
-            <span title="post.wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 369字</span>
+            <span title="post.wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 853</span>
           
 
           
@@ -486,12 +491,22 @@
       
 
       
-        <p>一、前言<br>冒泡排序是一种交换排序。</p>
+        <p><strong>一、前言</strong><br>冒泡排序是一种交换排序。</p>
 <p>什么是交换排序呢？<br>将列表的所有元素两两进行比较，如果存在不符合要求的排序就进行交换位置，直到整个列表都满足要求为止</p>
-<p>二、算法思想<br>它重复地走访要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。</p>
-<p>这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端，故名冒泡排序。<br>动态效果示意图：<br><img src="https://img-blog.csdnimg.cn/20190413004455684.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>假设有一个大小为 N 的无序序列。以升序冒泡排序为例，冒泡排序就是要每趟排序过程中通过两两比较相邻元素，将小的数字放到前面，大的数字放在后面。</p>
-<p>1、代码<br>python:<br><strong># -<em>- coding: utf-8 -</em>-</strong><br>def bubbleSort(input_list):<br>    ‘’’<br>    函数说明:冒泡排序（升序）<br>    Author:<br>        zang ao<br>    Parameters:<br>        input_list - 待排序列表<br>    Returns:<br>        sorted_list - 升序排序好的列表<br>    ‘’’<br>    if (len(input_list))==0:<br>        return []<br>    sorted_list=input_list<br>    for i in range(len( sorted_list)-1):<br>        print(“第”+str(i)+”趟排序”)<br>        for j in range(len( sorted_list)-1):<br>            if  sorted_list[j]&gt; sorted_list[j+1]:<br>                sorted_list[j], sorted_list[j+1]=sorted_list[j+1], sorted_list[j]<br>                print(sorted_list)<br>    return sorted_list</p>
-<p>if <strong>name</strong> == ‘<strong>main</strong>‘:<br>    input_list = [50, 123, 543, 187, 49, 30, 0, 2, 11, 100]<br>    print(‘排序前:’, input_list)<br>    sorted_list = bubbleSort(input_list)<br>    print(‘排序后:’, sorted_list)</p>
+<p><strong>二、算法思想</strong><br>它重复地走访要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。</p>
+<p>这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端，故名冒泡排序。<br>动态效果示意图：<br><img src="/2019/04/13/冒泡排序/timg.gif" alt="在这里插入图片描述"><br>假设有一个大小为 N 的无序序列。以升序冒泡排序为例，冒泡排序就是要每趟排序过程中通过两两比较相邻元素，将小的数字放到前面，大的数字放在后面。</p>
+<p>1、代码<br>python:<br><img src="/2019/04/13/冒泡排序/代码1.jpg" alt="daima"><br>2、运行结果<br>下面是程序运行之后的结果：<br><img src="/2019/04/13/冒泡排序/运行结果.jpg" alt="jieguo"></p>
+<p><strong>三、算法优化</strong><br>由上面的图我们可以发现，并不是每一趟都有数据交换的，因此我们可以在每一趟过程加入一个程序交换的<strong>标志性变量exchange</strong>，用于标志某一趟排序过程中是否有数据交换。<br>代码如下：<br><img src="/2019/04/13/冒泡排序/代码2.jpg" alt="daima"><br>运行结果：<br><img src="/2019/04/13/冒泡排序/最后结果.jpg" alt="jieguo"></p>
+<p><strong>四、算法分析</strong><br>1、算法排序性能分析：<br><img src="/2019/04/13/冒泡排序/分析.jpg" alt="fenxi"><br>2、时间复杂度<br>若文件的初始状态是正序的，一趟扫描即可完成排序。所需的关键字比较次数C和记录移动次数M均达到最小值：Cmin = N - 1, Mmin = 0。所以，冒泡排序最好时间复杂度为O(N)。</p>
+<p>但是上述代码，不能扫描一趟就完成排序，它会进行全扫描。所以一个改进的方法就是，当冒泡中途发现已经为正序了，便无需继续比对下去。改进方法一会儿介绍。</p>
+<p>若初始文件是反序的，需要进行 N -1 趟排序。每趟排序要进行 N - i 次关键字的比较(1 ≤ i ≤ N - 1)，且每次比较都必须移动记录三次来达到交换记录位置。在这种情况下，比较和移动次数均达到最大值：</p>
+<p>Cmax = N(N-1)/2 = O(N^2)</p>
+<p>Mmax = 3N(N-1)/2 = O(N^2)</p>
+<p>冒泡排序的最坏时间复杂度为O(N^2)。</p>
+<p>因此，冒泡排序的平均时间复杂度为O(N^2)。</p>
+<p>总结起来，其实就是一句话：当数据越接近正序时，冒泡排序性能越好。</p>
+<p>3、算法稳定性<br>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，r[i]=r[j]，且r[i]在r[j]之前，而在排序后的序列中，r[i]仍在r[j]之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
+<p>冒泡排序就是把小的元素往前调或者把大的元素往后调。是相邻的两个元素的比较，交换也发生在这两个元素之间。所以相同元素的前后顺序并没有改变，所以冒泡排序是一种稳定排序算法。</p>
 
       
     </div>

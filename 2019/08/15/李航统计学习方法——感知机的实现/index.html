@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="笔者，即将大四了，面临秋招的挑战，笔者以后想从事数据分析的相关工作，暑假实习自己在一家小公司做数据分析的工作，但是所接触到的工作内容都是比较偏业务方向的，偏技术的比重并没有我想象中的那么高，因此我想抓紧时间复习一下，加上之前看过台湾林轩田教授的机器学习视频，因此现在想试着去实现一下李航统计学习方法上面设计到的机器学习算法。 正文感知机：  假设输入空间是χ⊆Rn,输出空间是γ=(+1,−1)。输入">
+<meta name="keywords" content="感知机、机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="李航统计学习方法——感知机的实现">
+<meta property="og:url" content="http://yoursite.com/2019/08/15/李航统计学习方法——感知机的实现/index.html">
+<meta property="og:site_name" content="Dream Come True">
+<meta property="og:description" content="笔者，即将大四了，面临秋招的挑战，笔者以后想从事数据分析的相关工作，暑假实习自己在一家小公司做数据分析的工作，但是所接触到的工作内容都是比较偏业务方向的，偏技术的比重并没有我想象中的那么高，因此我想抓紧时间复习一下，加上之前看过台湾林轩田教授的机器学习视频，因此现在想试着去实现一下李航统计学习方法上面设计到的机器学习算法。 正文感知机：  假设输入空间是χ⊆Rn,输出空间是γ=(+1,−1)。输入">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190828145038145.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190828145533850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190828150037714.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190828150502410.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190828150559976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190828150828974.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190828150908868.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-08-29T00:56:26.649Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="李航统计学习方法——感知机的实现">
+<meta name="twitter:description" content="笔者，即将大四了，面临秋招的挑战，笔者以后想从事数据分析的相关工作，暑假实习自己在一家小公司做数据分析的工作，但是所接触到的工作内容都是比较偏业务方向的，偏技术的比重并没有我想象中的那么高，因此我想抓紧时间复习一下，加上之前看过台湾林轩田教授的机器学习视频，因此现在想试着去实现一下李航统计学习方法上面设计到的机器学习算法。 正文感知机：  假设输入空间是χ⊆Rn,输出空间是γ=(+1,−1)。输入">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190828145038145.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/15/李航统计学习方法——感知机的实现/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>李航统计学习方法——感知机的实现 | Dream Come True</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dream Come True</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">一个菜鸡的填坑之旅</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/李航统计学习方法——感知机的实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zang ao">
+      <meta itemprop="description" content="记录一下自己的平常的学习">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dream Come True">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">李航统计学习方法——感知机的实现
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-15 23:14:30" itemprop="dateCreated datePublished" datetime="2019-08-15T23:14:30+08:00">2019-08-15</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/15/李航统计学习方法——感知机的实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/15/李航统计学习方法——感知机的实现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2019/08/15/李航统计学习方法——感知机的实现/" class="leancloud_visitors" data-flag-title="李航统计学习方法——感知机的实现">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-divider">|</span>
+            <span title="post.wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 965</span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>笔者，即将大四了，面临秋招的挑战，笔者以后想从事数据分析的相关工作，暑假实习自己在一家小公司做数据分析的工作，但是所接触到的工作内容都是比较偏业务方向的，偏技术的比重并没有我想象中的那么高，因此我想抓紧时间复习一下，加上之前看过台湾林轩田教授的机器学习视频，因此现在想试着去实现一下李航统计学习方法上面设计到的机器学习算法。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a><strong>正文</strong></h2><p><strong>感知机</strong>：</p>
+<blockquote>
+<p>假设输入空间是χ⊆Rn,输出空间是γ=(+1,−1)。输入χ∈X表示实例的特征向量，对应于输入空间的点；输出y∈γ表示实例的类别。由输入空间到输出空间的如下函数：<br>f(x)=sign(wx+b)<br>称为感知机。其中，w和b为感知机模型的参数，sign是符号函数，即：<img src="https://img-blog.csdnimg.cn/20190828145038145.png" alt="在这里插入图片描述"></p>
+</blockquote>
+<p>sign好像很简单，当x大于等于0，sign输出1，否则输出-1。那么往前递归一下，wx+b如果大于等于0，f(x)就等于1，反之f(x)等于-1。我们再回头看一下感知机的函数f(x),简而言之，就是我们要找到那条线，wx+b，能够完美的将我们的数据集划分出来。<br><strong>得出结论：</strong><br>如果一条直线能够不分错一个点，那就是一条好的直线<br><strong>进一步来说：</strong><br>如果我们把所有分错的点和直线的距离求和，让这段求和的举例最小（最好是0，这样就表示没有分错的点了），这条直线就是我们要找的。</p>
+<p><strong>感知机的学习策略</strong><br><img src="https://img-blog.csdnimg.cn/20190828145533850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>就是说，我们要找到一条直线，就算这条直线不能将数据集完美切分，那么也要使错误分类的点到这条线上的距离之后最小，因此我们就要求每个点到线上的距离。<br><img src="https://img-blog.csdnimg.cn/20190828150037714.png" alt="距离公式"><br><img src="https://img-blog.csdnimg.cn/20190828150502410.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其实，我们对误分的点可以这样理解，例如实际应该属于线的右侧，y&gt;0，但实际上预测出来是在左侧（wx+b&lt;0），那就是分错了，结果是负，这时候再加个符号，结果就是正了，再除以w的模长，就是单个误分类的点到超平面的举例。举例总和就是所有误分类的点相加。</p>
+<p><strong>感知机的原始形式</strong><br><img src="https://img-blog.csdnimg.cn/20190828150559976.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>感知机的对偶形式</strong><br><img src="https://img-blog.csdnimg.cn/20190828150828974.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20190828150908868.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3phbmdhbzA3MTg=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>具体算法实现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">def perceptron(dataSet,eta):</span><br><span class="line">    # 获取到训练集的数据</span><br><span class="line">    dataMat = dataSet[:, 0:2]</span><br><span class="line">    # 获取标签数据</span><br><span class="line">    labelMat = dataSet[:, -1]</span><br><span class="line">    # 获取训练数据集的shape</span><br><span class="line">    m,n=dataMat.shape</span><br><span class="line">    # 初始化权重为0,样本长度保持一致</span><br><span class="line">    w=np.zeros(n)</span><br><span class="line">    # 初始化步长为0</span><br><span class="line">    b=0</span><br><span class="line">    flag=True</span><br><span class="line">    while flag:</span><br><span class="line">        for i in range(m):</span><br><span class="line">            # 获取当前样本的向量，当前样本所对应的标签，以及判断是否是误分标签</span><br><span class="line">            # 如果是误分标签，就进行梯度下降，更新w和b</span><br><span class="line">            if  np.any(labelMat[i] * (np.dot(w, dataMat[i]) + b) &lt;= 0):</span><br><span class="line">                w = w + eta * labelMat[i] * dataMat[i].T</span><br><span class="line">                b = b + eta * labelMat[i]</span><br><span class="line">                print(&quot;weight, bias: &quot;, end=&quot;&quot;)</span><br><span class="line">                print(w, end=&quot;  &quot;)</span><br><span class="line">                print(b)</span><br><span class="line">                flag = True</span><br><span class="line">                break</span><br><span class="line">            else:</span><br><span class="line">                flag = False</span><br><span class="line"></span><br><span class="line">    return w,b</span><br><span class="line"></span><br><span class="line">def perceptron_dual(dataSet,eta):</span><br><span class="line">    # 获取到训练集的数据</span><br><span class="line">    dataMat = dataSet[:, 0:2]</span><br><span class="line">    # 获取标签数据</span><br><span class="line">    labelMat = dataSet[:, -1].reshape((-1,1))</span><br><span class="line">    # 获取训练数据集的shape</span><br><span class="line">    m, n = dataMat.shape</span><br><span class="line">    w=np.zeros((m,1))</span><br><span class="line">    b=0</span><br><span class="line">    flag = True</span><br><span class="line">    while flag:</span><br><span class="line">        for i in range(m):</span><br><span class="line">            if (labelMat[i, 0] * (np.sum((w * labelMat * np.dot(dataMat, dataMat[i].T).reshape((m, 1)))) + b)) &lt;= 0:</span><br><span class="line">                w[i] = w[i] + eta</span><br><span class="line">                b = b + eta * labelMat[i]</span><br><span class="line">                flag = True</span><br><span class="line">                break</span><br><span class="line">            else:</span><br><span class="line">                flag = False</span><br><span class="line">    w = np.dot(dataMat.T, w * labelMat)</span><br><span class="line">    return w, b</span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    # 定义样本数据集，与课本P29上的例题数据一样</span><br><span class="line">    dataSet = np.array([[3, 3, 1], [4, 3, 1], [1, 1, -1]])</span><br><span class="line">    w, b = perceptron_dual(dataSet,1)</span><br><span class="line">    print(w,b)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/感知机、机器学习/" rel="tag"># 感知机、机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/19/selenium/" rel="next" title="爬虫系列之selenium">
+                <i class="fa fa-chevron-left"></i> 爬虫系列之selenium
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/28/Mysql基础（一）/" rel="prev" title="Mysql基础（一）">
+                Mysql基础（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zang ao</p>
+              <div class="site-description motion-element" itemprop="description">记录一下自己的平常的学习</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正文"><span class="nav-number">1.</span> <span class="nav-text">正文</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zang ao</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.0"></script>
+
+  <script src="/js/motion.js?v=7.1.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.0"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.0"></script>
+<script src="/js/post-details.js?v=7.1.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GxitQyt9RCoPJxdUlrRHmUtr-gzGzoHsz',
+    appKey: 'CGVCPfAtO3x9NWbkppv7UTth',
+    placeholder: '欢迎留言',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: '' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

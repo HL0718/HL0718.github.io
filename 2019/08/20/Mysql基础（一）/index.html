@@ -96,25 +96,18 @@
 
 
 
-  <meta name="description" content="一、前言冒泡排序是一种交换排序。 什么是交换排序呢？将列表的所有元素两两进行比较，如果存在不符合要求的排序就进行交换位置，直到整个列表都满足要求为止 二、算法思想它重复地走访要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。 这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端，故名冒泡排序。">
-<meta name="keywords" content="排序算法">
+  <meta name="description" content="这篇博客主要是笔者为了准备秋招的数据分析岗位，然后整理的数据库的一下基本概念，如果有什么不对的地方，欢迎各位通过QQ邮箱：1391716398与笔者进行联系和沟通。 1、介绍数据库模型· 层次模型· 网状模型· 关系模型 主流关系数据库· 商用数据库，例如：Oracle，SQL Server，DB2等；· 开源数据库，例如：MySQL，PostgreSQL等；· 桌面数据库，以微软Access为代">
+<meta name="keywords" content="Mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序算法（一）：冒泡排序">
-<meta property="og:url" content="http://yoursite.com/2019/04/13/冒泡排序/index.html">
+<meta property="og:title" content="Mysql基础（一）">
+<meta property="og:url" content="http://yoursite.com/2019/08/20/Mysql基础（一）/index.html">
 <meta property="og:site_name" content="Dream Come True">
-<meta property="og:description" content="一、前言冒泡排序是一种交换排序。 什么是交换排序呢？将列表的所有元素两两进行比较，如果存在不符合要求的排序就进行交换位置，直到整个列表都满足要求为止 二、算法思想它重复地走访要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。 这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端，故名冒泡排序。">
+<meta property="og:description" content="这篇博客主要是笔者为了准备秋招的数据分析岗位，然后整理的数据库的一下基本概念，如果有什么不对的地方，欢迎各位通过QQ邮箱：1391716398与笔者进行联系和沟通。 1、介绍数据库模型· 层次模型· 网状模型· 关系模型 主流关系数据库· 商用数据库，例如：Oracle，SQL Server，DB2等；· 开源数据库，例如：MySQL，PostgreSQL等；· 桌面数据库，以微软Access为代">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/timg.gif">
-<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/代码1.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/运行结果.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/代码2.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/最后结果.jpg">
-<meta property="og:image" content="http://yoursite.com/2019/04/13/冒泡排序/分析.jpg">
-<meta property="og:updated_time" content="2019-04-13T08:27:27.418Z">
+<meta property="og:updated_time" content="2019-09-01T05:10:37.716Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序算法（一）：冒泡排序">
-<meta name="twitter:description" content="一、前言冒泡排序是一种交换排序。 什么是交换排序呢？将列表的所有元素两两进行比较，如果存在不符合要求的排序就进行交换位置，直到整个列表都满足要求为止 二、算法思想它重复地走访要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。 这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端，故名冒泡排序。">
-<meta name="twitter:image" content="http://yoursite.com/2019/04/13/冒泡排序/timg.gif">
+<meta name="twitter:title" content="Mysql基础（一）">
+<meta name="twitter:description" content="这篇博客主要是笔者为了准备秋招的数据分析岗位，然后整理的数据库的一下基本概念，如果有什么不对的地方，欢迎各位通过QQ邮箱：1391716398与笔者进行联系和沟通。 1、介绍数据库模型· 层次模型· 网状模型· 关系模型 主流关系数据库· 商用数据库，例如：Oracle，SQL Server，DB2等；· 开源数据库，例如：MySQL，PostgreSQL等；· 桌面数据库，以微软Access为代">
 
 
 
@@ -122,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/04/13/冒泡排序/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/20/Mysql基础（一）/">
 
 
 
@@ -132,7 +125,7 @@
   };
 </script>
 
-  <title>排序算法（一）：冒泡排序 | Dream Come True</title>
+  <title>Mysql基础（一） | Dream Come True</title>
   
 
 
@@ -369,7 +362,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/13/冒泡排序/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/20/Mysql基础（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="zang ao">
@@ -386,7 +379,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">排序算法（一）：冒泡排序
+          <h1 class="post-title" itemprop="name headline">Mysql基础（一）
 
               
             
@@ -412,7 +405,7 @@
                 
               
 
-              <time title="创建时间：2019-04-13 16:26:55" itemprop="dateCreated datePublished" datetime="2019-04-13T16:26:55+08:00">2019-04-13</time>
+              <time title="创建时间：2019-08-20 15:20:36" itemprop="dateCreated datePublished" datetime="2019-08-20T15:20:36+08:00">2019-08-20</time>
             
 
             
@@ -430,7 +423,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/排序算法/" itemprop="url" rel="index"><span itemprop="name">排序算法</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
 
                 
                 
@@ -449,8 +442,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/04/13/冒泡排序/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/13/冒泡排序/" itemprop="commentCount"></span>
+                <a href="/2019/08/20/Mysql基础（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/20/Mysql基础（一）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -458,7 +451,7 @@
 
           
           
-            <span id="/2019/04/13/冒泡排序/" class="leancloud_visitors" data-flag-title="排序算法（一）：冒泡排序">
+            <span id="/2019/08/20/Mysql基础（一）/" class="leancloud_visitors" data-flag-title="Mysql基础（一）">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -469,7 +462,7 @@
                 <span class="leancloud-visitors-count"></span>
             </span>
             <span class="post-meta-divider">|</span>
-            <span title="post.wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 853</span>
+            <span title="post.wordcount"><span class="post-meta-item-icon"><i class="fa fa-file-word-o"></i></span>字数： 1k</span>
           
 
           
@@ -491,22 +484,38 @@
       
 
       
-        <p><strong>一、前言</strong><br>冒泡排序是一种交换排序。</p>
-<p>什么是交换排序呢？<br>将列表的所有元素两两进行比较，如果存在不符合要求的排序就进行交换位置，直到整个列表都满足要求为止</p>
-<p><strong>二、算法思想</strong><br>它重复地走访要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。</p>
-<p>这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端，故名冒泡排序。<br>动态效果示意图：<br><img src="/2019/04/13/冒泡排序/timg.gif" alt="在这里插入图片描述"><br>假设有一个大小为 N 的无序序列。以升序冒泡排序为例，冒泡排序就是要每趟排序过程中通过两两比较相邻元素，将小的数字放到前面，大的数字放在后面。</p>
-<p>1、代码<br>python:<br><img src="/2019/04/13/冒泡排序/代码1.jpg" alt="daima"><br>2、运行结果<br>下面是程序运行之后的结果：<br><img src="/2019/04/13/冒泡排序/运行结果.jpg" alt="jieguo"></p>
-<p><strong>三、算法优化</strong><br>由上面的图我们可以发现，并不是每一趟都有数据交换的，因此我们可以在每一趟过程加入一个程序交换的<strong>标志性变量exchange</strong>，用于标志某一趟排序过程中是否有数据交换。<br>代码如下：<br><img src="/2019/04/13/冒泡排序/代码2.jpg" alt="daima"><br>运行结果：<br><img src="/2019/04/13/冒泡排序/最后结果.jpg" alt="jieguo"></p>
-<p><strong>四、算法分析</strong><br>1、算法排序性能分析：<br><img src="/2019/04/13/冒泡排序/分析.jpg" alt="fenxi"><br>2、时间复杂度<br>若文件的初始状态是正序的，一趟扫描即可完成排序。所需的关键字比较次数C和记录移动次数M均达到最小值：Cmin = N - 1, Mmin = 0。所以，冒泡排序最好时间复杂度为O(N)。</p>
-<p>但是上述代码，不能扫描一趟就完成排序，它会进行全扫描。所以一个改进的方法就是，当冒泡中途发现已经为正序了，便无需继续比对下去。改进方法一会儿介绍。</p>
-<p>若初始文件是反序的，需要进行 N -1 趟排序。每趟排序要进行 N - i 次关键字的比较(1 ≤ i ≤ N - 1)，且每次比较都必须移动记录三次来达到交换记录位置。在这种情况下，比较和移动次数均达到最大值：</p>
-<p>Cmax = N(N-1)/2 = O(N^2)</p>
-<p>Mmax = 3N(N-1)/2 = O(N^2)</p>
-<p>冒泡排序的最坏时间复杂度为O(N^2)。</p>
-<p>因此，冒泡排序的平均时间复杂度为O(N^2)。</p>
-<p>总结起来，其实就是一句话：当数据越接近正序时，冒泡排序性能越好。</p>
-<p>3、算法稳定性<br>假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，r[i]=r[j]，且r[i]在r[j]之前，而在排序后的序列中，r[i]仍在r[j]之前，则称这种排序算法是稳定的；否则称为不稳定的。</p>
-<p>冒泡排序就是把小的元素往前调或者把大的元素往后调。是相邻的两个元素的比较，交换也发生在这两个元素之间。所以相同元素的前后顺序并没有改变，所以冒泡排序是一种稳定排序算法。</p>
+        <p>这篇博客主要是笔者为了准备秋招的数据分析岗位，然后整理的数据库的一下基本概念，如果有什么不对的地方，欢迎各位通过QQ邮箱：1391716398与笔者进行联系和沟通。</p>
+<p><strong><strong>1、介绍</strong></strong><br><strong>数据库模型</strong><br><strong>·</strong> 层次模型<br><strong>·</strong> 网状模型<br><strong>·</strong> 关系模型</p>
+<p><strong>主流关系数据库</strong><br><strong>·</strong> 商用数据库，例如：Oracle，SQL Server，DB2等；<br><strong>·</strong> 开源数据库，例如：MySQL，PostgreSQL等；<br><strong>·</strong> 桌面数据库，以微软Access为代表，适合桌面应用程序使用；<br><strong>·</strong> 嵌入式数据库，以Sqlite为代表，适合手机应用和桌面程序。</p>
+<p> <strong><strong>基本的SQL命令</strong></strong></p>
+<p> <strong>使用规则</strong><br> 每条SQL命令以分号结尾，不区分字母大小写。<br><strong>库的管理</strong><br>① 库的基本操作<br>查看已有库： show databases<br>创建新库： create database + 库名 + 指定字符集（charset=utf8）;<br>查看创建库： show create database 库名；<br>查看当前所在库： select database();<br>切换库： use 库名;<br>查看库中已有的表： show tables；<br>删除库: drop database 库名；</p>
+<p><strong>表的管理</strong><br>① 表的基本操作<br>创建表： create table 表名（字段名 数据类型；字段名 数据类型 …….）;<br>查看创建表的语句：show create table 表名；<br>查看表结构: desc 表名;<br>删除表名： drop table 表名；<br>② 表记录管理<br>在表中插入记录：<br>语法： insert into 表名 values (值1）,(值2),(值3)…….<br>指定字段插入：insert into 表名 (字段名列表） values (值1）,(值2),(值3)…….<br>查询表记录：<br>select * from 表名; (表中所有数据都显示出来）<br>select 字段名1，字段名2，字段名3 from 表名；（查找指定字段名）<br>表字段操作：<br>添加字段：alter table 表名 add 字段名 数据类型；（默认加在最后一列，如果加了first 就是加在第一列，affter+给定字段则是加在给定字段之后）<br>删除一个字段：<br>alter table 表名 drop 字段名；<br>修改字段数据类型：<br>alter table 表名 modify 字段名 新数据类型；</p>
+<p>#修改的数据类型会受到表中原始数据的限制；<br>修改字段名：<br>alter table 表名 change 字段名 new(字段名）；</p>
+<p><strong>数据类型</strong><br>Mysql数据库支持：整形，浮点型，字符型，时间类型，枚举类型，集合类型</p>
+<p><strong>整形：</strong></p>
+<blockquote>
+<p>类型：<br>tinyint:1字节   -128~127<br>smallint:2字节<br>mediumint:3字节<br>int:4字节    -2147483648~2147483647<br>bigint:8字节<br>约束：<br>unsigned:无符号<br>zerofill:0填充<br>不同类型所占字节数不一样，决定所占空间及存放数据的大小限制</p>
+</blockquote>
+<p><strong>浮点型</strong></p>
+<blockquote>
+<p>类型：<br>float：4字节， 3.4E -38~3.4E+38<br>double:8字节，1.7E-308~1.7E+308<br>decimal: M,D 大值基础上+2<br>宽度：限制存储宽度<br>（M，D）=&gt;M为位数，D为小数位<br>float（255，30）：精度最低，最常用<br>double(255,30):精度高，占位多<br>decimal(65,30):字符串存，全精度</p>
+</blockquote>
+<p><strong>字符型</strong></p>
+<blockquote>
+<p>类型：<br>char:定长<br>varchar:不定长<br>宽度：<br>限制存储宽度<br>char(4):以4个字符存储以char属性存储的数据<br>varchar(4):数据长度决定字符长度，为可变长度存储数据<br>两者特点：<br>char: 浪费存储空间，但是性能高；<br>varchar:节省存储空间，但是性能低。</p>
+</blockquote>
+<p><strong>时间类型：</strong></p>
+<blockquote>
+<p>类型：<br>year:yyyy(1901/2155)<br>date:yyyy-MM-dd(1000-01-01/9999-12-31)<br>time:HH:mm:ss<br>datetime:yyyy-MM-dd HH-mm-ss(1970-01-01 00:00:00/2308-01-19 (具体几点不知道))</p>
+</blockquote>
+<p><strong>枚举与集合</strong></p>
+<blockquote>
+<p>类型：<br>enum:单选<br>set:多选</p>
+</blockquote>
+<p><strong>约束条件</strong></p>
+<blockquote>
+<p>primary key:主键，唯一标识，表都会拥有，不设置为默认找第一个 不空，唯一字段；为标识则创建隐藏字段<br>foreing key：外键<br>unique key：唯一性数据, 该条字段的值需要保证唯一,不能重复<br>auto_increment：自增，只能加给key字段辅助修饰<br>not null：不为空<br>default：默认值<br>unsigned：无符号<br>zerofill：0填充注：<br>1.键可以提高数据的存取效率，提高io<br>2.联合唯一<br>create table web (<br>    ip char(16),<br>    port int,<br>    unique(ip,port)<br>);<br>3.联合主键<br>create table web (<br>    ip char(16),<br>    port int,<br>    primary key(ip,port)<br>);</p>
+</blockquote>
 
       
     </div>
@@ -530,7 +539,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/排序算法/" rel="tag"># 排序算法</a>
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
           
         </div>
       
@@ -543,8 +552,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/12/替换空格/" rel="next" title="剑指Offer系列（二）：替换字符串">
-                <i class="fa fa-chevron-left"></i> 剑指Offer系列（二）：替换字符串
+              <a href="/2019/08/15/李航统计学习方法——感知机的实现/" rel="next" title="李航统计学习方法——感知机的实现">
+                <i class="fa fa-chevron-left"></i> 李航统计学习方法——感知机的实现
               </a>
             
           </div>
@@ -552,10 +561,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/15/正则表达式/" rel="prev" title="爬虫系列之正则表达式">
-                爬虫系列之正则表达式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
